@@ -34,14 +34,80 @@ body {
     width: 100%;
     z-index: 1000;
     background: transparent;
-    backdrop-filter: blur(10px);
+    backdrop-filter: none;
     box-shadow: none;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 }
 
 .navbar.scrolled {
-    background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Transition for navbar links when navbar background changes */
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    margin-left: 30px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+/* Transition for navbar links when navbar background changes */
+.navbar:not(.scrolled) .nav-link,
+.navbar:not(.scrolled) .logo h2 {
+    color: white;
+}
+
+.navbar.scrolled .nav-link,
+.navbar.scrolled .logo h2 {
+    color: #2c3e50;
+}
+
+.nav-link:hover {
+    color: #3498db;
+}
+
+.navbar.scrolled .nav-link:hover {
+    color: #3498db;
+}
+
+.nav-link.btn-contact {
+    background: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    margin-left: 20px;
+}
+
+.navbar.scrolled .nav-link.btn-contact {
+    background: #3498db;
+    color: white;
+}
+
+.navbar.scrolled .nav-link.btn-contact:hover {
+    background: #2980b9;
+    color: white;
+}
+
+/* Ensure logo is visible in both states */
+.logo h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    transition: color 0.3s;
+}
+
+.navbar.scrolled .logo h2 {
+    color: #2c3e50;
+}
+
+.logo span {
+    color: #3498db;
+}
+
+.navbar.scrolled .logo span {
+    color: #3498db;
 }
 
 .nav-container {

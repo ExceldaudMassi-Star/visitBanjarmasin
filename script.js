@@ -83,11 +83,25 @@ const animateOnScroll = function() {
 window.addEventListener('load', animateOnScroll);
 window.addEventListener('scroll', animateOnScroll);
 
-// Navbar background change on scroll
+// Navbar background change on scroll with opacity transition
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
+    const heroSection = document.querySelector('.hero-section');
+    const heroHeight = heroSection.offsetHeight;
 
-    if (window.scrollY > 300) {
+    // Calculate scroll percentage relative to hero section height
+    const scrolled = window.pageYOffset;
+    const scrollPercent = Math.min(scrolled / heroHeight, 1);
+
+    // Apply gradual opacity to navbar background based on scroll position
+    // Opacity increases from 0 to 1 as user scrolls from top to end of hero section
+    const navbarOpacity = Math.min(scrollPercent * 1.5, 1); // Multiply by 1.5 to reach 100% before end of hero
+
+    // Update navbar background with calculated opacity
+    navbar.style.background = `rgba(255, 255, 255, ${navbarOpacity})`;
+
+    // Add scrolled class when opacity reaches 1 to maintain shadow effect
+    if (navbarOpacity >= 0.95) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
