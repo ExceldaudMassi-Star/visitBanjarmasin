@@ -23,36 +23,30 @@ document.addEventListener('click', (event) => {
     }
 });
 
-// Parallax Scrolling Effect
-function updateParallax() {
-    const scrolled = window.pageYOffset;
-    const parallaxContainer = document.querySelector('.parallax-container');
-
-    if (parallaxContainer) {
-        const layers = parallaxContainer.querySelectorAll('.parallax-layer');
-
-        layers.forEach((layer, index) => {
-            const speed = (index + 1) * 0.5; // Adjust speed for each layer
-            const yPos = -(scrolled * speed);
-            layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
-        });
-    }
-
-    // Handle hero content fade effect on scroll
+// Video Hero Content Parallax and Fade Effects on Scroll
+function updateHeroEffects() {
+    // Handle hero content fade and parallax effects on scroll
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
+        const scrolled = window.pageYOffset;
+
         // Calculate how much the user has scrolled relative to the hero section height
         const heroHeight = document.querySelector('.hero-section').offsetHeight;
-        const scrollPercent = Math.min(scrolled / heroHeight * 1.5, 1); // Membuat efek lebih cepat
+        const scrollPercent = Math.min(scrolled / heroHeight, 1); // Value between 0 and 1
+
         // Apply fade effect based on scroll percentage
         heroContent.style.opacity = 1 - scrollPercent;
+
+        // Apply parallax effect (vertical movement) based on scroll
+        const parallaxDistance = scrolled * 0.5; // Adjust multiplier to control parallax intensity
+        heroContent.style.transform = `translateY(${parallaxDistance}px)`;
     }
 }
 
-// Initialize parallax effect as soon as DOM is ready and update on scroll
-document.addEventListener('DOMContentLoaded', updateParallax);
-window.addEventListener('load', updateParallax);
-window.addEventListener('scroll', updateParallax);
+// Initialize hero effects as soon as DOM is ready and update on scroll
+document.addEventListener('DOMContentLoaded', updateHeroEffects);
+window.addEventListener('load', updateHeroEffects);
+window.addEventListener('scroll', updateHeroEffects);
 
 // Smooth Scrolling for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
